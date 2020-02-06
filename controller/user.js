@@ -10,9 +10,11 @@ class UserController {
     const { email, password } = req.body;
     User.create({ email, password })
       .then(response => {
-        res
-          .status(200)
-          .json({ message: "Success create user", data: response });
+        const payload = {
+          id: response.id,
+          email: response.email
+        };
+        res.status(200).json({ message: "Success create user", payload });
       })
       .catch(err => next(err));
   }
