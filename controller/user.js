@@ -13,7 +13,10 @@ class UserController {
           id: response.id,
           email: response.email
         };
-        res.status(200).json({ message: "Success create user", payload });
+        const token = generateToken(payload);
+        res
+          .status(200)
+          .json({ message: "Success create user", payload, token });
       })
       .catch(err => next(err));
   }
