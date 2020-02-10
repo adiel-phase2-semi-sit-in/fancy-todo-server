@@ -31,9 +31,12 @@ class TodoController {
     Todo.findAll({
       where: {
         UserId: req.decoded.id
-      }
+      },
+      order: [["due_date", "ASC"]]
     })
-      .then(response => res.status(200).json(response))
+      .then(response => {
+        res.status(200).json(response);
+      })
       .catch(err => next(err));
   }
 
